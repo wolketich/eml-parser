@@ -1,0 +1,21 @@
+node_modules/
+artifacts/
+coverage/
+playwright-report/
+test-results/
+.env
+.dev.vars
+.wrangler/
+.DS_Store
+data/
+*.db
+*.db-shm
+*.db-wal
+
+# Local exports and real mail fixtures must not be committed
+.local/
+*.zip
+*.eml
+*.msg
+*.pst
+*.ost

@@ -1,0 +1,11 @@
+{
+  "name": "mail-intake-bridge",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-08-25",
+  "vars": {
+    "ALLOWED_ORIGINS": "https://wolketich.github.io,http://127.0.0.1:4173,http://localhost:4173",
+    "REMOTE_FILE_HOSTS": "expertwindows.ie,www.expertwindows.ie",
+    "MONDAY_API_VERSION": "2026-04",
+    "MAX_REMOTE_FILE_BYTES": "26214400"
+  }
+}

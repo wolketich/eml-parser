@@ -1,0 +1,59 @@
+{
+  "name": "eml-parser",
+  "version": "1.0.0",
+  "description": "Review EML and MSG enquiries before importing them into monday.com.",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c blue,magenta \"tsx watch apps/full-stack/src/server/index.ts\" \"vite --host 127.0.0.1\"",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "vite build",
+    "build:server": "tsup apps/full-stack/src/server/index.ts --format esm --platform node --target node24 --out-dir artifacts/full-stack/server --sourcemap",
+    "build:standalone": "node tools/build-standalone.mjs",
+    "start": "node artifacts/full-stack/server/index.js",
+    "pm2:start": "pm2 start operations/windows/ecosystem.config.cjs",
+    "pm2:stop": "pm2 stop mail-intake",
+    "pm2:restart": "pm2 restart operations/windows/ecosystem.config.cjs",
+    "pm2:logs": "pm2 logs mail-intake",
+    "proxy:dev": "npx wrangler dev --config apps/upload-proxy/wrangler.jsonc",
+    "proxy:deploy": "npx wrangler deploy --config apps/upload-proxy/wrangler.jsonc",
+    "check": "npm run typecheck && npm test && npm run build && npm run build:standalone",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@fastify/multipart": "^9.2.1",
+    "@fastify/static": "^9.1.3",
+    "@kenjiuno/msgreader": "^1.28.0",
+    "@mondaydotcomorg/api": "^14.0.0",
+    "better-sqlite3": "^12.10.0",
+    "cheerio": "^1.2.0",
+    "dotenv": "^17.2.3",
+    "fastify": "^5.8.5",
+    "postal-mime": "^2.7.4",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.4",
+    "concurrently": "^9.2.1",
+    "esbuild": "^0.27.7",
+    "jsdom": "^27.4.0",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "vite": "^8.0.16",
+    "vitest": "^4.1.8"
+  }
+}
